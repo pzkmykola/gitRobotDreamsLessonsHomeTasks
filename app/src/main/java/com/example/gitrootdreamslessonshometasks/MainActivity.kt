@@ -1,6 +1,7 @@
 package com.example.gitrootdreamslessonshometasks
 
 import android.content.Intent
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -14,20 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val textView = findViewById<TextView>(R.id.biography)
-        textView.setText("  I was born on 12.19.1963 in the city of Khorostkiv, Ternopil region. " +
-                " Since I graduated from Lviv State University in 1985, I have been working and living in Lviv (the best city of Ukraine).\n" +
-                "  My experience as a C/C++ developer and electronics engineer is more 36 years. "  +
-                "I started my professional work as a student (1983–1985. University research sector as a Laboratory assistant. Repairing and maintenance of electronic equipment. Software development.). " +
-                "Then I continued a long professional path as an engineer and programmer:\n" +
-                " 1985-2003 - R&D Division in Scientific Research Institute of PHTE Lviv\n" +
-                " 2005-2011 - PDT Ukraine\n" +
-                " 2012-2017 - Cypress Microsystems\n" +
-                " 2018-2019 - Ezlo Innovation\n"+
-                " 2021-2023 - Intellias.\n" +
-                "  However, it's never too late to learn - now I aspire to become an Android developer as well." +
-                " I want to start my own business, combined with Home Automation, to pass on to my nephew and my grandson." +
-                "\n\n    My emain: mykola.pazuk@gmail.com")
-
+        textView.setText(R.string.txt_my_bio_content)
 
         val buttonPhone: Button = findViewById(R.id.callPhoneButton)
         buttonPhone.setOnClickListener {

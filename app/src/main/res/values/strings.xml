@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">GitRootDreamsLessonsHomeTasks</string>
+    <string name="butt_to">To</string>
+    <string name="butt_send_to">Send</string>
+    <string name="butt_email">Email</string>
+    <string name="butt_phone">Phone</string>
+    <string name="txt_new_message">New Message</string>
+    <string name="txt_default_text" translatable="false"> \n---\nPaziuk Mykola</string>
+    <string name="txt_my_name">Mykola Paziuk</string>
+    <string name="txt_position">Android/C/C++ developer</string>
+    <string name="img_content_description">App to create and send email</string>
+    <string name="img_content_description2">Lviv in background</string>
+    <string name="img_content_description3">My photo</string>
+    <string name="txt_hint_for_email">Enter email as xxxx@xxx.com</string>
+    <string name="txt_my_bio">My bio</string>
+    <string name="txt_my_bio_content">
+         I was born on 12.19.1963 in the city of Khorostkiv, Ternopil region. Since I graduated from Lviv State University in 1985, I have been working and living in Lviv (the best city of Ukraine).\n
+         My experience as a C/C++ developer and electronics engineer is more 36 years. I started my professional work as a student (1983–1985. University research sector as a Laboratory assistant. Repairing and maintenance of electronic equipment. Software development.). Then I continued a long professional path as an engineer and programmer:\n
+         1985 - 2003  RD Division in Scientific Research Institute of PHTE Lviv\n
+         2005 - 2011  PDT Ukraine\n
+         2012 - 2017  Cypress Microsystems\n
+         2018 - 2019   Ezlo Innovation\n
+         2021 - 2023  Intellias\n
+          However, it is never too late to learn - now I aspire to become an Android developer as well. I want to start my own business, combined with Home Automation, to pass on to my nephew and my grandson.\n
+        \n
+        \n
+            My email: <i>mykola.pazuk@gmail.com</i></string>
 </resources>

@@ -16,26 +16,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        android:contentDescription="App to create and send email" />
+        android:contentDescription="@string/img_content_description"/>
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New message"
+        android:text="@string/txt_new_message"
         android:textSize="25sp"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailView"
         app:layout_constraintVertical_chainStyle="packed"/>
+
     <Button
         android:id="@+id/buttonSendTo"
-        android:text="Send"
+        android:text="@string/butt_send_to"
         android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
@@ -45,7 +47,7 @@
 
     <Button
         android:id="@+id/buttonTo"
-        android:text="To"
+        android:text="@string/butt_to"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:layout_width="wrap_content"
@@ -66,7 +68,7 @@
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:focusable="true"
-        android:hint="Enter email as xxxx@xxx.com"
+        android:hint="@string/txt_hint_for_email"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:textColorHint="#546E7A"
@@ -90,7 +92,7 @@
         android:bufferType="spannable"
         android:gravity="top"
         android:inputType="textCapSentences|textMultiLine"
-        android:text=" \n---\nPaziuk Mykola"
+        android:text="@string/txt_default_text"
         android:textSize="16sp"
         android:minHeight="120dp"
         android:minLines="4"

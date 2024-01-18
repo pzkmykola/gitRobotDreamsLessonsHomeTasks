@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:clickable="true"
+            android:contentDescription="Lviv in background"
             android:alpha="0.5"
             android:src="@drawable/background_wallpaper"
             app:layout_constraintEnd_toEndOf="parent"

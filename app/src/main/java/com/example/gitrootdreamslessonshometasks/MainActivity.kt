@@ -1,5 +1,6 @@
 package com.example.gitrootdreamslessonshometasks
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -24,7 +25,9 @@ class MainActivity : AppCompatActivity() {
                 " 2018-2019 - Ezlo Innovation\n"+
                 " 2021-2023 - Intellias.\n" +
                 "  However, it's never too late to learn - now I aspire to become an Android developer as well." +
-                " I want to start my own business, combined with Home Automation, to pass on to my nephew and my grandson.")
+                " I want to start my own business, combined with Home Automation, to pass on to my nephew and my grandson." +
+                "\n\n    My emain: mykola.pazuk@gmail.com")
+
 
         val buttonPhone: Button = findViewById(R.id.callPhoneButton)
         buttonPhone.setOnClickListener {
@@ -32,16 +35,16 @@ class MainActivity : AppCompatActivity() {
             toast.show()
         }
 
-        val buttonEmail: Button = findViewById(R.id.sendEmailButton)
-        buttonEmail.setOnClickListener {
-            val toast = Toast.makeText(this, "My email: mykola.pazuk@gmail.com", Toast.LENGTH_LONG)
-            toast.show()
-        }
-
         val modifyBackground:ImageView = findViewById(R.id.imageView)
         modifyBackground.setOnClickListener {
             val toast = Toast.makeText(this, "Lviv is the best city of Ukraine!!!", Toast.LENGTH_LONG)
             toast.show()
+        }
+
+        val buttonEmail: Button = findViewById(R.id.sendEmailButton)
+        buttonEmail.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
         }
     }
 }

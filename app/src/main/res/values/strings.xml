@@ -3,7 +3,7 @@
     <string name="butt_send_to">Send</string>
     <string name="butt_email">Email</string>
     <string name="butt_phone">Phone</string>
-    <string name="txt_field_to">To</string>
+    <string name="txt_field_to">To:</string>
     <string name="txt_new_message">New Message</string>
     <string name="txt_default_text" translatable="false"> \n---\nPaziuk Mykola</string>
     <string name="txt_my_name">Mykola Paziuk</string>

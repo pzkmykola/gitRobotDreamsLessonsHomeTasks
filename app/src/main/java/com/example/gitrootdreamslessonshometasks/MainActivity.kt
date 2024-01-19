@@ -55,3 +55,4 @@ class MainActivity : AppCompatActivity() {
         const val PARCELABLE_MESSAGE = "ParcelableMessage"
     }
 }
+

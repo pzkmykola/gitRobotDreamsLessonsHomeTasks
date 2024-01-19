@@ -14,7 +14,7 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
         val editTextTo: EditText = findViewById<EditText>(R.id.emailAddress)
         val editTextMessage: EditText = findViewById<EditText>(R.id.texMessage)
-        val sendButtonTo:Button = findViewById(R.id.buttonSendTo)
+        val sendButtonTo: Button = findViewById(R.id.buttonSendTo)
 
         sendButtonTo.setOnClickListener {
 
@@ -22,21 +22,32 @@ class SecondActivity : AppCompatActivity() {
             val subject: String = ""
             val message: String = editTextMessage.text.toString()
             val email: Intent = Intent(/* action = */ Intent.ACTION_SEND)
-            //Toast.makeText(this, field_to, Toast.LENGTH_SHORT).show()
-            email.putExtra(Intent.EXTRA_EMAIL, field_to)
-            email.putExtra(Intent.EXTRA_SUBJECT, subject)
-            email.putExtra(Intent.EXTRA_TEXT, message)
-            email.setType("message/rfc822")
-            startActivity(/* intent = */ Intent.createChooser(email, "Choose an Email client:"))
+            Toast.makeText(this, field_to, Toast.LENGTH_SHORT).show()
 
-            val intent = Intent()
-            intent.putExtra(MESSAGE_TO_FIRST_ACTIVITY, "Email was sent successfully!")
-            setResult(RESULT_OK, intent)
-            finish()
+            with(email) {
+                //Toast.makeText(this, field_to, Toast.LENGTH_SHORT).show()
+
+                putExtra(Intent.EXTRA_EMAIL, new String[] { "mykola.paziuk@intellias.com" })
+
+
+                //email.putExtra(Intent.EXTRA_EMAIL, field_to)
+                email.putExtra(Intent.EXTRA_SUBJECT, subject)
+                email.putExtra(Intent.EXTRA_TEXT, message)
+                email.setType("message/rfc822")
+                startActivity(/* intent = */ Intent.createChooser(
+                    email,
+                    "Choose an Email client:"
+                )
+                )
+            }
         }
+        val intent = Intent()
+        intent.putExtra(MESSAGE_TO_FIRST_ACTIVITY, "Email was sent successfully!")
+        setResult(RESULT_OK, intent)
+        finish()
     }
-
     companion object{
         const val MESSAGE_TO_FIRST_ACTIVITY = "MessageToFirstActivity"
     }
+
 }

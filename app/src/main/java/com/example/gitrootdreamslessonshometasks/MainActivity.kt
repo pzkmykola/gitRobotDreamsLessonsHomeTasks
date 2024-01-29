@@ -45,29 +45,41 @@ class MainActivity : AppCompatActivity() {
 
         buttonWeatherForecast.setOnClickListener {
             val apiClient = ApiClient.client.create(ApiInterface::class.java)
-
+            apiClient
+                .getWeatherForecastByCityNameRx("Lviv")
+                .subscribeOn(Schedulers.io())
+                .map{response -> mapToDisplayItem(response) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    textWeatherTemperature.text = "${it.temperature}"
+                    textWeatherWind.text = "${it.wind}"
+                    textWeatherDescription.text = "${it.description}"
+                },{
+                    Toast.makeText(this, "Error ${it.message}", Toast.LENGTH_SHORT).show()
+                })
+            
             //Commented code below represents solution with Retrofit only
-            apiClient.getWeatherForecast().enqueue(object : Callback<WeatherForecastResponse>{
-                override fun onResponse(
-                    call: Call<WeatherForecastResponse>,
-                    response: Response<WeatherForecastResponse>
-                )
-                {
-                    if(response.isSuccessful){
-                        val message1 =  response.body()?.temperature
-                        val message2 = response.body()?.wind
-                        val message3 =  response.body()?.description
-                        textWeatherTemperature.text = "Temperature is ${message1}"
-                        textWeatherWind.text = "Wind is ${message2}"
-                        textWeatherDescription.text = "Ii general, ${message3}"
-                    }
-                }
-
-                override fun onFailure(call: Call<WeatherForecastResponse>, t: Throwable) {
-                    Toast.makeText(this@MainActivity, "Error ${t.message}", Toast.LENGTH_LONG).show()
-                }
-
-            })
+//            apiClient.getWeatherForecast().enqueue(object : Callback<WeatherForecastResponse>{
+//                override fun onResponse(
+//                    call: Call<WeatherForecastResponse>,
+//                    response: Response<WeatherForecastResponse>
+//                )
+//                {
+//                    if(response.isSuccessful){
+//                        val message1 =  response.body()?.temperature
+//                        val message2 = response.body()?.wind
+//                        val message3 =  response.body()?.description
+//                        textWeatherTemperature.text = "Temperature is ${message1}"
+//                        textWeatherWind.text = "Wind is ${message2}"
+//                        textWeatherDescription.text = "Ii general, ${message3}"
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<WeatherForecastResponse>, t: Throwable) {
+//                    Toast.makeText(this@MainActivity, "Error ${t.message}", Toast.LENGTH_LONG).show()
+//                }
+//
+//            })
         }
     }
 }
@@ -78,3 +90,12 @@ data class ForecastPerDay(
     val temperature:String,
     val wind:String
 )
+
+data class DisplayWeatherToday(val temperature:String, val wind:String, val description:String)
+
+fun mapToDisplayItem(response: WeatherForecastResponse):DisplayWeatherToday{
+    val temperature = "Temperature is ${response.temperature}"
+    val wind = "Wind is ${response.wind}"
+    val description = "In general, ${response.description} "
+    return DisplayWeatherToday(temperature, wind, description)
+}

@@ -84,21 +84,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/weatherInUkraine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:fontFamily="sans-serif-black"
-                android:text="Are you wondering what ...\n the weather is like now in Odessa?\n Click 'WeatherForecast?' button!"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guideLineHorizontal"
-                app:layout_constraintVertical_chainStyle="packed" />
+        <TextView
+            android:id="@+id/weatherInUkraine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Are you wondering what ...\n the weather is like now in some ukrainian city?\n Put name of sity in tne field blelow and Click 'WeatherForecast?' button!"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideLineHorizontal"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-            <TextView
+        <TextView
+            android:id="@+id/cityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name of city: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintTop_toBottomOf="@id/weatherInUkraine"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+        <EditText
+            android:id="@+id/enteredName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="Enter name of city here"
+            android:inputType="textPersonName"
+            android:minHeight="32dp"
+            android:layout_marginStart="24dp"
+            android:textColorHint="#546E7A"
+            app:layout_constraintBottom_toBottomOf="@+id/cityName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cityName"
+            app:layout_constraintTop_toBottomOf="@id/weatherInUkraine"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:ems="14"/>
+
+        <TextView
                 android:id="@+id/weatherTemperatureTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -108,44 +143,44 @@
                 android:fontFamily="sans-serif-black"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weatherInUkraine"
+                app:layout_constraintTop_toBottomOf="@id/cityName"
                 app:layout_constraintVertical_chainStyle="packed" />
 
-            <TextView
-                android:id="@+id/weatherWindTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif-black"
-                android:text="Wind?"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weatherTemperatureTextView"
-                app:layout_constraintVertical_chainStyle="packed" />
+        <TextView
+            android:id="@+id/weatherWindTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Wind?"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weatherTemperatureTextView"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-            <TextView
-                android:id="@+id/weatherDescriptionTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif-black"
-                android:textSize="12sp"
-                android:text="In general?"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weatherWindTextView"
-                app:layout_constraintVertical_chainStyle="packed" />
+        <TextView
+            android:id="@+id/weatherDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-black"
+            android:textSize="12sp"
+            android:text="In general?"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weatherWindTextView"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-            <ImageView
-                android:id="@+id/imageWeatherForecast"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/weather_forecast"
-                app:layout_constraintStart_toEndOf="@id/guideLineVertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weatherInUkraine" />
+        <ImageView
+            android:id="@+id/imageWeatherForecast"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/weather_forecast"
+            app:layout_constraintStart_toEndOf="@id/guideLineVertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cityName" />
 
         <Button
             android:id="@+id/sendEmailButton"

@@ -1,10 +1,12 @@
 package com.example.gitrootdreamslessonshometasks
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +21,7 @@ import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -42,11 +45,12 @@ class MainActivity : AppCompatActivity() {
         val textWeatherTemperature:TextView = findViewById(R.id.weatherTemperatureTextView)
         val textWeatherWind:TextView = findViewById(R.id.weatherWindTextView)
         val textWeatherDescription:TextView = findViewById(R.id.weatherDescriptionTextView)
-
+        val editTextTo: EditText = findViewById<EditText>(R.id.enteredName)
         buttonWeatherForecast.setOnClickListener {
+            val name_of_city: String = editTextTo.text.toString()
             val apiClient = ApiClient.client.create(ApiInterface::class.java)
             apiClient
-                .getWeatherForecastByCityNameRx("Lviv")
+                .getWeatherForecastByCityNameRx(name_of_city)
                 .subscribeOn(Schedulers.io())
                 .map{response -> mapToDisplayItem(response) }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -57,9 +61,10 @@ class MainActivity : AppCompatActivity() {
                 },{
                     Toast.makeText(this, "Error ${it.message}", Toast.LENGTH_SHORT).show()
                 })
-            
-            //Commented code below represents solution with Retrofit only
-//            apiClient.getWeatherForecast().enqueue(object : Callback<WeatherForecastResponse>{
+
+//Commented code below represents solution with Retrofit only
+//           apiClient.getWeatherForecast().enqueue(object : Callback<WeatherForecastResponse>{
+//                      }
 //                override fun onResponse(
 //                    call: Call<WeatherForecastResponse>,
 //                    response: Response<WeatherForecastResponse>

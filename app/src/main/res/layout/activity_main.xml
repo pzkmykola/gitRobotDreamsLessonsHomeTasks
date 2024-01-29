@@ -84,43 +84,68 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/imageWeatherForecast"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/weather_forecast"
-            app:layout_constraintStart_toStartOf="@id/guideLineVertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideLineHorizontal"
-            app:layout_constraintVertical_chainStyle="packed"/>
+            <TextView
+                android:id="@+id/weatherInUkraine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Are you wondering what ...\n ... the weather is like now?\n Click 'WeatherForecast?' button!"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideLineHorizontal"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-        <TextView
-            android:id="@+id/weatherInUkraine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Are you wondering what ...\n ... the weather is like now?\n Click 'WeatherForecast' button!"
-            android:padding="16dp"
-            android:layout_marginStart="24dp"
-            android:fontFamily="sans-serif-black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideLineVertical"
-            app:layout_constraintTop_toBottomOf="@id/guideLineHorizontal"
-            app:layout_constraintVertical_chainStyle="packed" />
+            <TextView
+                android:id="@+id/weatherTemperatureTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Temperature?"
+                android:fontFamily="sans-serif-black"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weatherInUkraine"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-        <TextView
-            android:id="@+id/weatherForecast"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Weather  in Kyiv ..."
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/sendEmailButton"
-            app:layout_constraintTop_toBottomOf="@id/imageWeatherForecast"
-            app:layout_constraintVertical_chainStyle="packed" />
+            <TextView
+                android:id="@+id/weatherWindTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Wind?"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weatherTemperatureTextView"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/weatherDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-black"
+                android:textSize="12sp"
+                android:text="In general?"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weatherWindTextView"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <ImageView
+                android:id="@+id/imageWeatherForecast"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/weather_forecast"
+                app:layout_constraintStart_toEndOf="@id/guideLineVertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weatherInUkraine" />
 
         <Button
             android:id="@+id/sendEmailButton"
@@ -134,7 +159,7 @@
 
         <Button
             android:id="@+id/buttonWeatherForecast"
-            android:text="WeatherForecast"
+            android:text="WeatherForecast?"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

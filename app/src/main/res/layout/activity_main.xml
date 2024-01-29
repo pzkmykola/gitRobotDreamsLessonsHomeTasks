@@ -91,7 +91,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Are you wondering what ...\n ... the weather is like now?\n Click 'WeatherForecast?' button!"
+                android:text="Are you wondering what ...\n the weather is like now in Odessa?\n Click 'WeatherForecast?' button!"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -9,9 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.create
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,8 +44,10 @@ class MainActivity : AppCompatActivity() {
         val textWeatherDescription:TextView = findViewById(R.id.weatherDescriptionTextView)
 
         buttonWeatherForecast.setOnClickListener {
-            val client = ApiClient.client.create(ApiInterface::class.java)
-            client.getWeatherForecast().enqueue(object : Callback<WeatherForecastResponse>{
+            val apiClient = ApiClient.client.create(ApiInterface::class.java)
+
+            //Commented code below represents solution with Retrofit only
+            apiClient.getWeatherForecast().enqueue(object : Callback<WeatherForecastResponse>{
                 override fun onResponse(
                     call: Call<WeatherForecastResponse>,
                     response: Response<WeatherForecastResponse>

@@ -1,36 +1,33 @@
 package com.example.gitrootdreamslessonshometasks
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.create
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView = findViewById<TextView>(R.id.biography)
-        textView.setText("  I was born on 12.19.1963 in the city of Khorostkiv, Ternopil region. " +
-                " Since I graduated from Lviv State University in 1985, I have been working and living in Lviv (the best city of Ukraine).\n" +
-                "  My experience as a C/C++ developer and electronics engineer is more 36 years. "  +
-                "I started my professional work as a student (1983–1985. University research sector as a Laboratory assistant. Repairing and maintenance of electronic equipment. Software development.). " +
-                "Then I continued a long professional path as an engineer and programmer:\n" +
-                " 1985-2003 - R&D Division in Scientific Research Institute of PHTE Lviv\n" +
-                " 2005-2011 - PDT Ukraine\n" +
-                " 2012-2017 - Cypress Microsystems\n" +
-                " 2018-2019 - Ezlo Innovation\n"+
-                " 2021-2023 - Intellias.\n" +
-                "  However, it's never too late to learn - now I aspire to become an Android developer as well." +
-                " I want to start my own business, combined with Home Automation, to pass on to my nephew and my grandson.")
-
-        val buttonPhone: Button = findViewById(R.id.callPhoneButton)
-        buttonPhone.setOnClickListener {
-            val toast = Toast.makeText(this, "My phone number: +38067-681-7651", Toast.LENGTH_LONG)
-            toast.show()
-        }
+        val textView = findViewById<TextView>(R.id.myPhone)
+        textView.setText("  My phone number is +38-067-681-76-51")
 
         val buttonEmail: Button = findViewById(R.id.sendEmailButton)
         buttonEmail.setOnClickListener {
@@ -43,5 +40,67 @@ class MainActivity : AppCompatActivity() {
             val toast = Toast.makeText(this, "Lviv is the best city of Ukraine!!!", Toast.LENGTH_LONG)
             toast.show()
         }
+
+        val buttonWeatherForecast: Button = findViewById(R.id.buttonWeatherForecast)
+        val textWeatherTemperature:TextView = findViewById(R.id.weatherTemperatureTextView)
+        val textWeatherWind:TextView = findViewById(R.id.weatherWindTextView)
+        val textWeatherDescription:TextView = findViewById(R.id.weatherDescriptionTextView)
+        val editTextTo: EditText = findViewById<EditText>(R.id.enteredName)
+        buttonWeatherForecast.setOnClickListener {
+            val name_of_city: String = editTextTo.text.toString()
+            val apiClient = ApiClient.client.create(ApiInterface::class.java)
+            apiClient
+                .getWeatherForecastByCityNameRx(name_of_city)
+                .subscribeOn(Schedulers.io())
+                .map{response -> mapToDisplayItem(response) }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    textWeatherTemperature.text = "${it.temperature}"
+                    textWeatherWind.text = "${it.wind}"
+                    textWeatherDescription.text = "${it.description}"
+                },{
+                    Toast.makeText(this, "Error ${it.message}", Toast.LENGTH_SHORT).show()
+                })
+
+//Commented code below represents solution with Retrofit only
+//           apiClient.getWeatherForecast().enqueue(object : Callback<WeatherForecastResponse>{
+//                      }
+//                override fun onResponse(
+//                    call: Call<WeatherForecastResponse>,
+//                    response: Response<WeatherForecastResponse>
+//                )
+//                {
+//                    if(response.isSuccessful){
+//                        val message1 =  response.body()?.temperature
+//                        val message2 = response.body()?.wind
+//                        val message3 =  response.body()?.description
+//                        textWeatherTemperature.text = "Temperature is ${message1}"
+//                        textWeatherWind.text = "Wind is ${message2}"
+//                        textWeatherDescription.text = "Ii general, ${message3}"
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<WeatherForecastResponse>, t: Throwable) {
+//                    Toast.makeText(this@MainActivity, "Error ${t.message}", Toast.LENGTH_LONG).show()
+//                }
+//
+//            })
+        }
     }
+}
+
+data class WeatherForecastResponse(val temperature: String, val wind: String, val description: String, val forecast: Array<ForecastPerDay>)
+data class ForecastPerDay(
+    val day:String,
+    val temperature:String,
+    val wind:String
+)
+
+data class DisplayWeatherToday(val temperature:String, val wind:String, val description:String)
+
+fun mapToDisplayItem(response: WeatherForecastResponse):DisplayWeatherToday{
+    val temperature = "Temperature is ${response.temperature}"
+    val wind = "Wind is ${response.wind}"
+    val description = "In general, ${response.description} "
+    return DisplayWeatherToday(temperature, wind, description)
 }

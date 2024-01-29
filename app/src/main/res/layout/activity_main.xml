@@ -36,7 +36,7 @@
             app:layout_constraintVertical_chainStyle="packed"/>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideLine"
+            android:id="@+id/guideLineVertical"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5"
             android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="Mykola Paziuk"
             android:visibility="visible"
-            app:layout_constraintStart_toStartOf="@id/guideLine"
+            app:layout_constraintStart_toStartOf="@id/guideLineVertical"
             app:layout_constraintTop_toBottomOf="@id/imageView"
             app:layout_constraintBottom_toTopOf="@id/position"
             app:layout_constraintVertical_chainStyle="packed"/>
@@ -59,28 +59,128 @@
             android:layout_height="wrap_content"
             android:text="Android/C/C++ developer"
             android:visibility="visible"
-            app:layout_constraintStart_toStartOf="@id/guideLine"
+            app:layout_constraintStart_toStartOf="@id/guideLineVertical"
             app:layout_constraintBottom_toBottomOf="@id/imageView2"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
-            android:id="@+id/biography"
+            android:id="@+id/myPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="My phone number: +38-067-681-76-51"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-black"
-            android:gravity="center_vertical"
-            android:text="My bio"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/sendEmailButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/position"
-            app:layout_constraintVertical_bias="0.123"
             app:layout_constraintVertical_chainStyle="packed" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideLineHorizontal"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/weatherInUkraine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Are you wondering what ...\n the weather is like now in some ukrainian city?\n Put name of sity in tne field blelow and Click 'WeatherForecast?' button!"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideLineHorizontal"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/cityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name of city: "
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:clickable="false"
+            android:focusable="false"
+            app:layout_constraintTop_toBottomOf="@id/weatherInUkraine"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/white"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+        <EditText
+            android:id="@+id/enteredName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="Enter name of city here"
+            android:inputType="textPersonName"
+            android:minHeight="32dp"
+            android:layout_marginStart="24dp"
+            android:textColorHint="#546E7A"
+            app:layout_constraintBottom_toBottomOf="@+id/cityName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cityName"
+            app:layout_constraintTop_toBottomOf="@id/weatherInUkraine"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:ems="14"/>
+
+        <TextView
+                android:id="@+id/weatherTemperatureTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="Temperature?"
+                android:fontFamily="sans-serif-black"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cityName"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/weatherWindTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Wind?"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weatherTemperatureTextView"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/weatherDescriptionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-black"
+            android:textSize="12sp"
+            android:text="In general?"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/weatherWindTextView"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <ImageView
+            android:id="@+id/imageWeatherForecast"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/weather_forecast"
+            app:layout_constraintStart_toEndOf="@id/guideLineVertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cityName" />
 
         <Button
             android:id="@+id/sendEmailButton"
@@ -89,17 +189,18 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideLine"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/buttonWeatherForecast"/>
 
         <Button
-            android:id="@+id/callPhoneButton"
-            android:text="Phone"
+            android:id="@+id/buttonWeatherForecast"
+            android:text="WeatherForecast?"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:clickable="true"
-            app:layout_constraintStart_toEndOf="@id/sendEmailButton"
+            app:layout_constraintStart_toStartOf="@id/guideLineVertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

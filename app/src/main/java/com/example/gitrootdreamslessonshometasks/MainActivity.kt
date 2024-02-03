@@ -1,7 +1,11 @@
 package com.example.gitrootdreamslessonshometasks
 
+import android.content.Intent
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,28 +17,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val textView = findViewById<TextView>(R.id.biography)
-        textView.setText("  I was born on 12.19.1963 in the city of Khorostkiv, Ternopil region. " +
-                " Since I graduated from Lviv State University in 1985, I have been working and living in Lviv (the best city of Ukraine).\n" +
-                "  My experience as a C/C++ developer and electronics engineer is more 36 years. "  +
-                "I started my professional work as a student (1983–1985. University research sector as a Laboratory assistant. Repairing and maintenance of electronic equipment. Software development.). " +
-                "Then I continued a long professional path as an engineer and programmer:\n" +
-                " 1985-2003 - R&D Division in Scientific Research Institute of PHTE Lviv\n" +
-                " 2005-2011 - PDT Ukraine\n" +
-                " 2012-2017 - Cypress Microsystems\n" +
-                " 2018-2019 - Ezlo Innovation\n"+
-                " 2021-2023 - Intellias.\n" +
-                "  However, it's never too late to learn - now I aspire to become an Android developer as well." +
-                " I want to start my own business, combined with Home Automation, to pass on to my nephew and my grandson.")
+        textView.setText(R.string.txt_my_bio_content)
 
         val buttonPhone: Button = findViewById(R.id.callPhoneButton)
         buttonPhone.setOnClickListener {
             val toast = Toast.makeText(this, "My phone number: +38067-681-7651", Toast.LENGTH_LONG)
-            toast.show()
-        }
-
-        val buttonEmail: Button = findViewById(R.id.sendEmailButton)
-        buttonEmail.setOnClickListener {
-            val toast = Toast.makeText(this, "My email: mykola.pazuk@gmail.com", Toast.LENGTH_LONG)
             toast.show()
         }
 
@@ -43,5 +30,29 @@ class MainActivity : AppCompatActivity() {
             val toast = Toast.makeText(this, "Lviv is the best city of Ukraine!!!", Toast.LENGTH_LONG)
             toast.show()
         }
+
+        val buttonEmail: Button = findViewById(R.id.sendEmailButton)
+        buttonEmail.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            intent.putExtra(MESSAGE_TO_SECOND_ACTIVITY, "Message from first activity")
+            /*val bundle = Bundle()
+            bundle.putParcelable(PARCELABLE_MESSAGE, CustomMessage("custom message"))*/
+            startActivityForResult(intent, 600)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
+        if(requestCode == 600 && resultCode == RESULT_OK){
+            val message = intent?.getStringExtra(SecondActivity.MESSAGE_TO_FIRST_ACTIVITY)
+            message?.let {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    companion object{
+        const val MESSAGE_TO_SECOND_ACTIVITY = "MessageToSecondActivity"
+        const val PARCELABLE_MESSAGE = "ParcelableMessage"
     }
 }
+

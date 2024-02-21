@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -23,7 +25,7 @@ import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,25 +46,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.buttonWeatherForecast.setOnClickListener {
-            val name_of_city: String = binding.cityName.text.toString()
-            viewModel.getData(name_of_city)
+            val nameOfCity: String = binding.cityName.text.toString()
+            viewModel.getData(nameOfCity)
         }
 
         viewModel.uiState.observe(this){
             when(it){
                 is MyViewModel.UIState.Empty -> {
+
                     Toast.makeText(this, "Empty response", Toast.LENGTH_SHORT).show()
                 }
                 is MyViewModel.UIState.Processing -> {
-                    Toast.makeText(this, "Processing...", Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = VISIBLE
+                    //Toast.makeText(this, "Processing...", Toast.LENGTH_SHORT).show()
                 }
                 is MyViewModel.UIState.Result -> {
                     val weather = mapToDisplayItem(it.weather)
+                    binding.progressBar.visibility = INVISIBLE
                     binding.weatherTemperatureTextView.text = weather.temperature
                     binding.weatherWindTextView.text = weather.wind
                     binding.weatherDescriptionTextView.text = weather.wind
                 }
                 is MyViewModel.UIState.Error -> {
+                    binding.progressBar.visibility = INVISIBLE
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -70,12 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-data class WeatherForecastResponse(val temperature: String, val wind: String, val description: String, val forecast: Array<ForecastPerDay>)
-data class ForecastPerDay(
-    val day:String,
-    val temperature:String,
-    val wind:String
-)
+data class WeatherForecastResponse(val temperature: String, val wind: String, val description: String)
 
 data class DisplayWeatherToday(val temperature:String, val wind:String, val description:String)
 

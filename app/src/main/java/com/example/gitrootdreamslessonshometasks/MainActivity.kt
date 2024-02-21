@@ -11,6 +11,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
+import com.example.gitrootdreamslessonshometasks.databinding.ActivityMainBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -21,70 +23,49 @@ import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityMainBinding
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val viewModel = ViewModelProvider(this)[MyViewModel::class.java]
 
-        val textView = findViewById<TextView>(R.id.myPhone)
-        textView.setText("  My phone number is +38-067-681-76-51")
+        binding.myPhone.text = "  My phone number is +38-067-681-76-51"
 
-        val buttonEmail: Button = findViewById(R.id.sendEmailButton)
-        buttonEmail.setOnClickListener {
+        binding.sendEmailButton.setOnClickListener {
             val toast = Toast.makeText(this, "My email: mykola.pazuk@gmail.com", Toast.LENGTH_LONG)
             toast.show()
         }
 
-        val modifyBackground:ImageView = findViewById(R.id.imageView)
-        modifyBackground.setOnClickListener {
+        binding.imageView.setOnClickListener {
             val toast = Toast.makeText(this, "Lviv is the best city of Ukraine!!!", Toast.LENGTH_LONG)
             toast.show()
         }
 
-        val buttonWeatherForecast: Button = findViewById(R.id.buttonWeatherForecast)
-        val textWeatherTemperature:TextView = findViewById(R.id.weatherTemperatureTextView)
-        val textWeatherWind:TextView = findViewById(R.id.weatherWindTextView)
-        val textWeatherDescription:TextView = findViewById(R.id.weatherDescriptionTextView)
-        val editTextTo: EditText = findViewById<EditText>(R.id.enteredName)
-        buttonWeatherForecast.setOnClickListener {
-            val name_of_city: String = editTextTo.text.toString()
-            val apiClient = ApiClient.client.create(ApiInterface::class.java)
-            apiClient
-                .getWeatherForecastByCityNameRx(name_of_city)
-                .subscribeOn(Schedulers.io())
-                .map{response -> mapToDisplayItem(response) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    textWeatherTemperature.text = "${it.temperature}"
-                    textWeatherWind.text = "${it.wind}"
-                    textWeatherDescription.text = "${it.description}"
-                },{
-                    Toast.makeText(this, "Error ${it.message}", Toast.LENGTH_SHORT).show()
-                })
+        binding.buttonWeatherForecast.setOnClickListener {
+            val name_of_city: String = binding.cityName.text.toString()
+            viewModel.getData(name_of_city)
+        }
 
-//Commented code below represents solution with Retrofit only
-//           apiClient.getWeatherForecast().enqueue(object : Callback<WeatherForecastResponse>{
-//                      }
-//                override fun onResponse(
-//                    call: Call<WeatherForecastResponse>,
-//                    response: Response<WeatherForecastResponse>
-//                )
-//                {
-//                    if(response.isSuccessful){
-//                        val message1 =  response.body()?.temperature
-//                        val message2 = response.body()?.wind
-//                        val message3 =  response.body()?.description
-//                        textWeatherTemperature.text = "Temperature is ${message1}"
-//                        textWeatherWind.text = "Wind is ${message2}"
-//                        textWeatherDescription.text = "Ii general, ${message3}"
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<WeatherForecastResponse>, t: Throwable) {
-//                    Toast.makeText(this@MainActivity, "Error ${t.message}", Toast.LENGTH_LONG).show()
-//                }
-//
-//            })
+        viewModel.uiState.observe(this){
+            when(it){
+                is MyViewModel.UIState.Empty -> {
+                    Toast.makeText(this, "Empty response", Toast.LENGTH_SHORT).show()
+                }
+                is MyViewModel.UIState.Processing -> {
+                    Toast.makeText(this, "Processing...", Toast.LENGTH_SHORT).show()
+                }
+                is MyViewModel.UIState.Result -> {
+                    val weather = mapToDisplayItem(it.weather)
+                    binding.weatherTemperatureTextView.text = weather.temperature
+                    binding.weatherWindTextView.text = weather.wind
+                    binding.weatherDescriptionTextView.text = weather.wind
+                }
+                is MyViewModel.UIState.Error -> {
+                    Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 }

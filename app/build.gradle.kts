@@ -33,6 +33,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    viewBinding { enable=true }
 }
 
 dependencies {
@@ -48,6 +49,8 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxjava:2.2.21")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.3.0")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+    implementation ("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

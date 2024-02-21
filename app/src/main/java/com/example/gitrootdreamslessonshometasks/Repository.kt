@@ -1,11 +1,12 @@
 package com.example.gitrootdreamslessonshometasks
 
 import retrofit2.Response
-import retrofit2.Retrofit
+import javax.inject.Singleton
 
-class Repository (private val client: Retrofit) {
+@Singleton
+class Repository (private val apiClient: ApiClient) {
     suspend fun getWeatherForecastByCityName(cityName:String) : Response<WeatherForecastResponse> {
-        val apiInterface = client.create(ApiInterface::class.java)
+        val apiInterface = apiClient.client.create(ApiInterface::class.java)
         return apiInterface.getWeatherForecastByCityName(cityName)
     }
 }

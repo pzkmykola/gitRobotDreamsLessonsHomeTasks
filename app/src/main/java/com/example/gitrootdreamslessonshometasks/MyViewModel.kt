@@ -1,6 +1,5 @@
 package com.example.gitrootdreamslessonshometasks
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,13 +7,14 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MyViewModel : ViewModel() {
+@Singleton
+class MyViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     private val _uiState = MutableLiveData<UIState>(UIState.Empty)
     val uiState: LiveData<UIState> = _uiState
-    private val repo = MyApplication.getApp().repo
+    //private val repo = MyApplication.getApp().repo
     fun getData(cityName:String) {
         _uiState.value = UIState.Processing
         viewModelScope.launch (Dispatchers.IO){

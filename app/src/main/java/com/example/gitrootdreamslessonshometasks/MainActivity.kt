@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.example.gitrootdreamslessonshometasks.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -23,15 +24,18 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.create
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    @Inject
+    lateinit var viewModel: MyViewModel
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val viewModel = ViewModelProvider(this)[MyViewModel::class.java]
 
         binding.myPhone.text = "  My phone number is +38-067-681-76-51"
 

@@ -7,7 +7,7 @@ import javax.inject.Singleton
 
 @Singleton
 class ApiClient  @Inject constructor() {
-        val client = Retrofit.Builder()
+        val client: Retrofit? = Retrofit.Builder()
             .baseUrl("https://goweather.herokuapp.com")
             .addConverterFactory(GsonConverterFactory.create())
             .build()

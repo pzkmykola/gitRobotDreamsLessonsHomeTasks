@@ -6,7 +6,7 @@ import javax.inject.Singleton
 @Singleton
 class Repository (private val apiClient: ApiClient) {
     suspend fun getWeatherForecastByCityName(cityName:String) : Response<WeatherForecastResponse> {
-        val apiInterface = apiClient.client.create(ApiInterface::class.java)
-        return apiInterface.getWeatherForecastByCityName(cityName)
+        val apiInterface = apiClient.client?.create(ApiInterface::class.java)
+        return (apiInterface?.getWeatherForecastByCityName(cityName))!!
     }
 }

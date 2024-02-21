@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 is MyViewModel.UIState.Processing -> {
                     binding.progressBar.visibility = VISIBLE
-                    //Toast.makeText(this, "Processing...", Toast.LENGTH_SHORT).show()
                 }
                 is MyViewModel.UIState.Result -> {
                     val weather = mapToDisplayItem(it.weather)

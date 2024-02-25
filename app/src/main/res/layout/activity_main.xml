@@ -1,209 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="8dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:clickable="true"
-            android:alpha="0.5"
-            android:src="@drawable/background_wallpaper"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"/>
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_marginTop="170dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/my_photo_v3"
-            app:layout_constraintTop_toTopOf = "parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideLineVertical"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mykola Paziuk"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="@id/guideLineVertical"
-            app:layout_constraintTop_toBottomOf="@id/imageView"
-            app:layout_constraintBottom_toTopOf="@id/position"
-            app:layout_constraintVertical_chainStyle="packed"/>
-
-        <TextView
-            android:id="@+id/position"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Android/C/C++ developer"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="@id/guideLineVertical"
-            app:layout_constraintBottom_toBottomOf="@id/imageView2"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/myPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="My phone number: +38-067-681-76-51"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-black"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/position"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideLineHorizontal"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/weatherInUkraine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Are you wondering what ...\n the weather is like now in some ukrainian city?\n Put name of sity in tne field blelow and Click 'WeatherForecast?' button!"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideLineHorizontal"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/cityName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name of city: "
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:clickable="false"
-            android:focusable="false"
-            app:layout_constraintTop_toBottomOf="@id/weatherInUkraine"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/white"
-            app:layout_constraintVertical_chainStyle="packed"/>
-
-        <EditText
-            android:id="@+id/enteredName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:clickable="true"
-            android:focusable="true"
-            android:hint="Enter name of city here"
-            android:inputType="textPersonName"
-            android:minHeight="32dp"
-            android:layout_marginStart="24dp"
-            android:textColorHint="#546E7A"
-            app:layout_constraintBottom_toBottomOf="@+id/cityName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cityName"
-            app:layout_constraintTop_toBottomOf="@id/weatherInUkraine"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:ems="14"/>
-
-        <TextView
-                android:id="@+id/weatherTemperatureTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="Temperature?"
-                android:fontFamily="sans-serif-black"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cityName"
-                app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/weatherWindTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-black"
-            android:text="Wind?"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weatherTemperatureTextView"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/weatherDescriptionTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif-black"
-            android:textSize="12sp"
-            android:text="In general?"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/weatherWindTextView"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <ImageView
-            android:id="@+id/imageWeatherForecast"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/weather_forecast"
-            app:layout_constraintStart_toEndOf="@id/guideLineVertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cityName" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/sendEmailButton"
-            android:text="Email"
+            android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
+            android:text="Request"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/buttonWeatherForecast"/>
-
-        <Button
-            android:id="@+id/buttonWeatherForecast"
-            android:text="WeatherForecast?"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            app:layout_constraintStart_toStartOf="@id/guideLineVertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
+            app:layout_constraintTop_toBottomOf="@id/textView"/>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -211,9 +33,9 @@
             android:layout_height="wrap_content"
             android:theme="@style/Widget.Material3.CircularProgressIndicator"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/buttonWeatherForecast"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

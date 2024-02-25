@@ -28,64 +28,32 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+
+    lateinit var binding:ActivityMainBinding
     @Inject
-    lateinit var viewModel: MyViewModel
-    @SuppressLint("CheckResult")
+    lateinit var viewModel:MyViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.myPhone.text = "  My phone number is +38-067-681-76-51"
-
-        binding.sendEmailButton.setOnClickListener {
-            val toast = Toast.makeText(this, "My email: mykola.pazuk@gmail.com", Toast.LENGTH_LONG)
-            toast.show()
+        //val viewModel:MyViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        binding.button.setOnClickListener {
+            viewModel.getData()
         }
-
-        binding.imageView.setOnClickListener {
-            val toast = Toast.makeText(this, "Lviv is the best city of Ukraine!!!", Toast.LENGTH_LONG)
-            toast.show()
-        }
-
-        binding.buttonWeatherForecast.setOnClickListener {
-            val nameOfCity: String = binding.cityName.text.toString()
-            viewModel.getData(nameOfCity)
-        }
-
         viewModel.uiState.observe(this){
             when(it){
-                is MyViewModel.UIState.Empty -> {
-
-                    Toast.makeText(this, "Empty response", Toast.LENGTH_SHORT).show()
-                }
-                is MyViewModel.UIState.Processing -> {
-                    binding.progressBar.visibility = VISIBLE
-                }
+                is MyViewModel.UIState.Empty -> Unit
                 is MyViewModel.UIState.Result -> {
-                    val weather = mapToDisplayItem(it.weather)
                     binding.progressBar.visibility = INVISIBLE
-                    binding.weatherTemperatureTextView.text = weather.temperature
-                    binding.weatherWindTextView.text = weather.wind
-                    binding.weatherDescriptionTextView.text = weather.wind
+                    binding.textView.text = it.title
                 }
+                is MyViewModel.UIState.Processing -> binding.progressBar.visibility = VISIBLE
                 is MyViewModel.UIState.Error -> {
                     binding.progressBar.visibility = INVISIBLE
-                    Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+                    binding.textView.text = it.description
                 }
             }
         }
     }
-}
-
-data class WeatherForecastResponse(val temperature: String, val wind: String, val description: String)
-
-data class DisplayWeatherToday(val temperature:String, val wind:String, val description:String)
-
-fun mapToDisplayItem(response: WeatherForecastResponse):DisplayWeatherToday{
-    val temperature = "Temperature is ${response.temperature}"
-    val wind = "Wind is ${response.wind}"
-    val description = "In general, ${response.description} "
-    return DisplayWeatherToday(temperature, wind, description)
 }

@@ -5,36 +5,36 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MyViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
+class MyViewModel @Inject constructor(private val repo:Repository):ViewModel(){
     private val _uiState = MutableLiveData<UIState>(UIState.Empty)
     val uiState: LiveData<UIState> = _uiState
 
-    fun getData(cityName:String) {
+    fun getData() {
         _uiState.value = UIState.Processing
-        viewModelScope.launch (Dispatchers.IO){
-            val response = async { repo.getWeatherForecastByCityName(cityName) }.await()
-            if (response.isSuccessful && response.body() != null) {
-                val weather:WeatherForecastResponse = response.body()!!
-                _uiState.postValue(UIState.Result(weather))
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                try {
+                    val bitcoin = repo.getCurrencyByName("bitcoin")
+                    if (bitcoin.isSuccessful) {
+                        val data = bitcoin.body()?.data
+                        _uiState.postValue(UIState.Result("${data?.id} ${data?.rateUsd}"))
+                    } else _uiState.postValue(UIState.Error("Error Code ${bitcoin.code()}"))
+                } catch (e: Exception) {
+                    _uiState.postValue(UIState.Error(e.localizedMessage?:"Error on response"))
+                }
             }
-            else{
-                val errorMessage = response.message().toString()
-                _uiState.postValue(UIState.Error(errorMessage))
-            }
-
         }
     }
-
     sealed class UIState {
         object Empty : UIState()
         object Processing : UIState()
-        class Result(val weather:WeatherForecastResponse) : UIState()
-        class Error(val message: String) : UIState()
+        class Result(val title: String) : UIState()
+        class Error(val description: String) : UIState()
     }
 }

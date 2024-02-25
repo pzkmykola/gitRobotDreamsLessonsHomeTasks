@@ -4,9 +4,9 @@ import retrofit2.Response
 import javax.inject.Singleton
 
 @Singleton
-class Repository (private val apiClient: ApiClient) {
-    suspend fun getWeatherForecastByCityName(cityName:String) : Response<WeatherForecastResponse> {
+class Repository(val apiClient: ApiClient) {
+    suspend fun getCurrencyByName(name:String): Response<BitcoinResponse> {
         val apiInterface = apiClient.client.create(ApiInterface::class.java)
-        return apiInterface.getWeatherForecastByCityName(cityName)
+        return apiInterface.getCryptoByName(name)
     }
 }

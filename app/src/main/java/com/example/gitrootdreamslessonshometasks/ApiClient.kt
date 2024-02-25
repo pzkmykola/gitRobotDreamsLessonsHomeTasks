@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Singleton
 class ApiClient  @Inject constructor() {
         val client = Retrofit.Builder()
-            .baseUrl("https://goweather.herokuapp.com")
+            .baseUrl("https://api.coincap.io/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 }

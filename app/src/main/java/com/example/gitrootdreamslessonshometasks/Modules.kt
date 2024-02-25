@@ -9,10 +9,12 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class Application {
+class Application{
+
     @Provides
     @Singleton
-    fun getApiClient(): Retrofit? = ApiClient().client
+    fun getApiClient() = ApiClient().client
+
     @Provides
     @Singleton
     fun getRepository(apiClient: ApiClient) = Repository(apiClient)

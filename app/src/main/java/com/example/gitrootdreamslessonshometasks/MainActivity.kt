@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //val viewModel:MyViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+
         binding.button.setOnClickListener {
             viewModel.getData()
         }

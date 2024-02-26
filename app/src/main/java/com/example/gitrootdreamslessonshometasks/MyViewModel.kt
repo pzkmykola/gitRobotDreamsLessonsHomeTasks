@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class MyViewModel @Inject constructor(private val repo:Repository):ViewModel(){
+class MyViewModel @Inject constructor(val repo:Repository):ViewModel(){
     private val _uiState = MutableLiveData<UIState>(UIState.Empty)
     val uiState: LiveData<UIState> = _uiState
 
@@ -23,7 +23,10 @@ class MyViewModel @Inject constructor(private val repo:Repository):ViewModel(){
                     val bitcoin = repo.getCurrencyByName("bitcoin")
                     if (bitcoin.isSuccessful) {
                         val data = bitcoin.body()?.data
-                        _uiState.postValue(UIState.Result("${data?.id} ${data?.rateUsd}"))
+                        if(data != null) {
+                            _uiState.postValue(UIState.Result("${data.id} ${data.rateUsd}"))
+                        }
+                        else _uiState.postValue(UIState.Error("Error: Null Response"))
                     } else _uiState.postValue(UIState.Error("Error Code ${bitcoin.code()}"))
                 } catch (e: Exception) {
                     _uiState.postValue(UIState.Error(e.localizedMessage?:"Error on response"))

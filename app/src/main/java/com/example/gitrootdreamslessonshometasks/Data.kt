@@ -2,9 +2,10 @@ package com.example.gitrootdreamslessonshometasks
 
 data class BitcoinResponse(val data: Data?)
 
+
 data class Data(
-    val id:String,
-    val symbol:String,
-    val currencySymbol:String,
-    val rateUsd:String
+    var id:String,
+    var symbol:String ,
+    var currencySymbol:String,
+    var rateUsd:String
 )

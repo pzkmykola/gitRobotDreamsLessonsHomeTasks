@@ -28,7 +28,6 @@
             android:visibility="visible"
             motion:layout_constraintVertical_chainStyle="packed"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
         <Constraint
             android:id="@+id/callPhoneButton"
@@ -52,6 +51,7 @@
             android:layout_height="140dp"
             android:layout_marginRight="28dp"
             android:visibility="invisible"
+            motion:pathMotionArc="startVertical"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintVertical_chainStyle="packed"

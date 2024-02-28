@@ -13,8 +13,8 @@
                 motion:framePosition="25"
                 motion:motionTarget="@id/imageView2"
                 android:rotation="360"
-                android:scaleX ="2.0"
-                android:scaleY ="2.0"/>
+                android:scaleX ="3.0"
+                android:scaleY ="3.0"/>
         </KeyFrameSet>
     </Transition>
 
@@ -29,6 +29,7 @@
             motion:layout_constraintVertical_chainStyle="packed"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
+
         <Constraint
             android:id="@+id/callPhoneButton"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +40,7 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp" />
+
         <Constraint
             android:id="@+id/sendEmailButton"
             android:visibility="invisible"
@@ -46,6 +48,7 @@
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="@id/guideLine" />
+
         <Constraint
             android:layout_width="140dp"
             android:layout_height="140dp"
@@ -69,6 +72,7 @@
             motion:layout_constraintVertical_chainStyle="packed"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
+
         <Constraint
             android:id="@+id/imageView2"
             android:layout_width="140dp"
@@ -79,11 +83,13 @@
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="170dp" />
+
         <Constraint
             android:id="@+id/guideLine"
             motion:layout_constraintGuide_percent="0.5"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
+
         <Constraint
             android:id="@+id/name"
             android:layout_width="wrap_content"
@@ -93,6 +99,7 @@
             motion:layout_constraintTop_toBottomOf="@id/imageView"
             motion:layout_constraintVertical_chainStyle="packed"
             motion:layout_constraintStart_toStartOf="@id/guideLine" />
+
         <Constraint
             android:id="@+id/position"
             android:layout_width="wrap_content"
@@ -100,7 +107,8 @@
             motion:layout_constraintBottom_toBottomOf="@id/imageView2"
             android:visibility="visible"
             motion:layout_constraintVertical_chainStyle="packed"
-            motion:layout_constraintStart_toStartOf="@id/guideLine" />
+            motion:layout_constraintStart_toStartOf="@id/guideLine"/>
+
         <Constraint
             android:id="@+id/biography"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +122,8 @@
             motion:layout_constraintBottom_toTopOf="@id/sendEmailButton"
             motion:layout_constraintVertical_bias="0.123"
             motion:layout_constraintTop_toBottomOf="@id/position"
-            motion:layout_constraintHorizontal_bias="1.0" />
+            motion:layout_constraintHorizontal_bias="1.0"/>
+
         <Constraint
             android:id="@+id/sendEmailButton"
             android:visibility="visible"
@@ -122,6 +131,7 @@
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="@id/guideLine" />
+
         <Constraint
             android:id="@+id/callPhoneButton"
             android:visibility="visible"
@@ -132,5 +142,7 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp" />
+
     </ConstraintSet>
+
 </MotionScene>

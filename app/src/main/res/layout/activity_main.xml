@@ -94,7 +94,7 @@
             android:text="@string/butt_email"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideLine" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/callPhoneButton"

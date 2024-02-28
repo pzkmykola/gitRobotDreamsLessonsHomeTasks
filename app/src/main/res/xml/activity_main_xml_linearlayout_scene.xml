@@ -31,29 +31,10 @@
             motion:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
-            android:id="@+id/callPhoneButton"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/sendEmailButton"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp" />
-
-        <Constraint
-            android:id="@+id/sendEmailButton"
-            android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintStart_toStartOf="@id/guideLine" />
-
-        <Constraint
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:layout_marginRight="28dp"
-            android:visibility="invisible"
+            android:visibility="visible"
             motion:pathMotionArc="startVertical"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -126,22 +107,22 @@
 
         <Constraint
             android:id="@+id/sendEmailButton"
-            android:visibility="visible"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintStart_toStartOf="@id/guideLine" />
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
 
         <Constraint
             android:id="@+id/callPhoneButton"
-            android:visibility="visible"
+            android:visibility="invisible"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/sendEmailButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp" />
+            android:layout_marginStart="8dp"/>
 
     </ConstraintSet>
 
